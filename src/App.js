@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
+import { useGetCenter } from "./hooks/useGetCenter";
 import { getVideos } from "./redux/action";
 
 const toggleAutoPlay = (el, center) => {
@@ -19,16 +20,9 @@ const toggleAutoPlay = (el, center) => {
 };
 
 function App({ videos, _getVideos }) {
-  const [center, setCenter] = useState({
-    x: null,
-    y: null,
-  });
+  const center = useGetCenter();
   useEffect(() => {
     _getVideos();
-    setCenter({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-    });
   }, []);
 
   const changesThePlayStatusForEachElement = (el) => {
