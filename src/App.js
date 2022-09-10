@@ -8,9 +8,11 @@ const toggleAutoPlay = (el, center) => {
     bottom: el.getBoundingClientRect().bottom,
   };
   if (center.y > elementPosition.top && center.y < elementPosition.bottom) {
+    el.play();
     el.autoplay = true;
     el.muted = true;
   } else {
+    el.pause();
     el.autoplay = false;
     el.muted = false;
   }
