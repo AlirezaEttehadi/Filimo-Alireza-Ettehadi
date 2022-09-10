@@ -3,19 +3,19 @@ import { connect } from "react-redux";
 import { useGetCenter } from "./hooks/useGetCenter";
 import { getVideos } from "./redux/action";
 
-const toggleAutoPlay = (el, center) => {
+const toggleAutoPlay = (element, center) => {
   const elementPosition = {
-    top: el.getBoundingClientRect().top,
-    bottom: el.getBoundingClientRect().bottom,
+    top: element.getBoundingClientRect().top,
+    bottom: element.getBoundingClientRect().bottom,
   };
   if (center.y > elementPosition.top && center.y < elementPosition.bottom) {
-    el.play();
-    el.autoplay = true;
-    el.muted = true;
+    element.play();
+    element.autoplay = true;
+    element.muted = true;
   } else {
-    el.pause();
-    el.autoplay = false;
-    el.muted = false;
+    element.pause();
+    element.autoplay = false;
+    element.muted = false;
   }
 };
 
@@ -25,10 +25,10 @@ function App({ videos, _getVideos }) {
     _getVideos();
   }, []);
 
-  const changesThePlayStatusForEachElement = (el) => {
-    toggleAutoPlay(el, center);
+  const changesThePlayStatusForEachElement = (element) => {
+    toggleAutoPlay(element, center);
     window.addEventListener("scroll", () => {
-      toggleAutoPlay(el, center);
+      toggleAutoPlay(element, center);
     });
   };
 
@@ -37,9 +37,9 @@ function App({ videos, _getVideos }) {
       {videos?.map((video) => {
         return (
           <video
-            ref={(el) => {
-              if (!el) return;
-              changesThePlayStatusForEachElement(el);
+            ref={(element) => {
+              if (!element) return;
+              changesThePlayStatusForEachElement(element);
             }}
             width="320"
             height="240"
