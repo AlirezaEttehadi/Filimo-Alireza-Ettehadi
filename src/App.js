@@ -2,34 +2,13 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useGetCenter } from "./hooks/useGetCenter";
 import { getVideos } from "./redux/action";
+import { changeVideoPlayStatus } from "./utils/changeVideoPlayStatus";
 
 function App({ videos, _getVideos }) {
   const center = useGetCenter();
   useEffect(() => {
     _getVideos();
   }, []);
-
-  const changesThePlayStatusForEachElement = (element) => {
-    const toggleAutoPlay = (element, center) => {
-      const elementPosition = {
-        top: element.getBoundingClientRect().top,
-        bottom: element.getBoundingClientRect().bottom,
-      };
-      if (center.y > elementPosition.top && center.y < elementPosition.bottom) {
-        element.play();
-        element.autoplay = true;
-        element.muted = true;
-      } else {
-        element.pause();
-        element.autoplay = false;
-        element.muted = false;
-      }
-    };
-    toggleAutoPlay(element, center);
-    window.addEventListener("scroll", () => {
-      toggleAutoPlay(element, center);
-    });
-  };
 
   return (
     <>
@@ -38,7 +17,7 @@ function App({ videos, _getVideos }) {
           <video
             ref={(element) => {
               if (!element) return;
-              changesThePlayStatusForEachElement(element);
+              changeVideoPlayStatus(element, center);
             }}
             width="320"
             height="240"
