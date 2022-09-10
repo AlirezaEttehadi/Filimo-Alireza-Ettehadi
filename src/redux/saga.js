@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { setVideos } from "./action";
 import { GET_VIDEOS } from "./constants";
-import { getVideosRequest } from "./apis";
+import { getVideosRequest } from "../apis";
 
 function* getVideosSaga() {
   try {

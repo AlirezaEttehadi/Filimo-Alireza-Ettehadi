@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { getVideos } from "./action";
+import { getVideos } from "./redux/action";
 
 const toggleAutoPlay = (el, center) => {
   const elementPosition = {
